@@ -1,0 +1,39 @@
+<view class="wrapper">
+  <view class="title"> 公积金贷款计算器</view>
+  <view class="item">
+    所在地区
+  </view>
+  <picker mode="region" level="city" bindchange="bindRegionChange" value="{{city}}">
+    <view class="picker">
+      <view class="input {{city[1]||'placeholder'}}">
+        {{ city[1] || '请选择城市'  }}
+      </view>
+    </view>
+  </picker>
+  <view class="item">
+    <text class="month">已缴纳月数</text>
+    <input class="input" placeholder="请输入月数" type="number" value="{{month}}" bindinput="onChange" data-type="month" />
+  </view>
+  <view class="item">
+    <text class="month">个人月缴存额（单位：元）</text>
+    <input class="input" placeholder="请输入薪资" type="number" value="{{money}}" bindinput="onChange" data-type="money" />
+  </view>
+  <view class="item">
+    <text class="month">账户余额（单位：元）</text>
+    <input class="input" placeholder="请输入余额" type="number" value="{{remainAmount}}" bindinput="onChange" data-type="remainAmount" />
+  </view>
+  <view class="item">
+    <text class="month">双边缴纳比例之和%</text>
+    <input class="input" placeholder="请输入缴纳比例" type="digit" value="{{ratio}}" bindinput="onChange" data-type="ratio" />
+  </view>
+  <view class="item">
+    <text class="month">贷款年限</text>
+    <picker mode="selector" range="{{yearsRange}}" bindchange="onYearsChange" data-type="year" value="{{year}}">
+      <view class="input {{year||'placeholder'}}">
+        {{year || '请选择利率'  }}
+      </view>
+    </picker>
+  </view>
+  <button bind:tap="computedAmount" class="submit">计算可贷款金额</button>
+  <view class="result" wx:if="{{result > 0}}">预计可贷款金额：¥ 0</view>
+</view>

@@ -49,3 +49,8 @@ export function calculateLoanPaymentsEqualPrincipal(principal: number, annualRat
 
   return payments;
 }
+
+export function getYearsRange() {
+  const yearsRange = Array.from({ length: 30 }).map((_, idx) => `${idx + 1}年（${(idx + 1) * 12}期）`)
+  return yearsRange
+}

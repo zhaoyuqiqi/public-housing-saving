@@ -1,0 +1,52 @@
+<!-- 还款 -->
+<view class="wrapper">
+  <view class="title"> 公积金还款计算器</view>
+  <view class="item">
+    <text class="month">公积金贷款金额(单位：万元)</text>
+    <input class="input" placeholder="请输入贷款金额" type="number" value="{{returnMoney}}" bindinput="onChange" data-type="returnMoney" />
+  </view>
+  <view class="item">
+    <text class="month">公积金贷款利率</text>
+    <picker mode="selector" range="{{range}}" range-key="name" bindchange="bindReturnRatioChange" value="{{autoReturn}}">
+      <view class="input {{autoReturn||'placeholder'}}">
+        {{autoReturn || '请选择利率'  }}
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view class="month">手动输入利率%</view>
+    <text class="tips">手动利率与公积金贷款利率不一致时以手动输入利率为准</text>
+    <input class="input" placeholder="请输入利率" type="digit" value="{{returnRatio}}" bindinput="onChange" data-type="returnRatio" />
+  </view>
+  <view class="item">
+    <text class="month">贷款年限</text>
+    <picker mode="selector" range="{{yearsRange}}" bindchange="onYearsChange" data-type="returnYear" value="{{returnYear}}">
+      <view class="input {{returnYear||'placeholder'}}">
+        {{returnYear || '请选择利率'  }}
+      </view>
+    </picker>
+  </view>
+  <!-- <view class="item">
+    <text class="month">还款方式</text>
+    <radio-group bindchange="radioChange" class="" data-type="isMoreReturnType">
+      <label class="return-type-label">
+        <radio value="1" checked />
+        <view>等额本息<text class="tips">(每月还款金额相同)</text></view>
+      </label>
+      <label class="return-type-label">
+        <radio value="2" />
+        <view>等额本金<text class="tips">(首月还款最多，逐月递减)</text></view>
+      </label>
+    </radio-group>
+  </view> -->
+  <button bind:tap="computedReturnMoney" class="submit">计算还款金额</button>
+  <!-- 等额本息 -->
+  <block wx:if="{{isMoreReturnType}}">
+    <view class="item">
+      <text class="month">公积金贷款金额(单位：万元)</text>
+      <input class="input" placeholder="请输入贷款金额" type="number" value="{{returnMoney}}" bindinput="onChange" data-type="returnMoney" />
+    </view>
+  </block>
+  <block wx:else>
+  </block>
+</view>
