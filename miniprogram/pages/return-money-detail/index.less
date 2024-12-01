@@ -1,0 +1,94 @@
+/* pages/return-money-detail.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  color: #09090b;
+  background-color: rgb(243, 244, 246);
+  padding: 48rpx 0;
+}
+
+.wrapper {
+  width: 680rpx;
+  margin: 0 auto;
+  border-radius: 8rpx;
+  border: 1px solid #f5f7f8;
+  background-color: #fff;
+  padding: 48rpx 0;
+  box-sizing: border-box;
+  box-shadow: 0 0 #0000;
+
+  .tabs {
+    display: flex;
+    padding: 0 48rpx;
+    justify-content: space-between;
+
+    .tab-item {
+      text-align: center;
+      padding-bottom: 8rpx;
+
+      &.active {
+        border-bottom: 2px solid #09090b;
+      }
+    }
+
+    .tips {
+      font-size: 24rpx;
+      color: red;
+    }
+  }
+
+  .swiper {
+    margin-top: 48rpx;
+    height: 510rpx;
+
+    .form-item {
+      box-sizing: border-box;
+      width: 584rpx;
+      margin: 0 auto;
+      border-bottom: 1px solid #ccc;
+      height: 80rpx;
+      line-height: 80rpx;
+      display: flex;
+      justify-content: space-between;
+
+      .title {
+        font-size: 36rpx;
+      }
+
+      .info {
+        display: flex;
+
+        .value {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+
+}
+
+.table {
+  font-size: 24rpx;
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  border-right: 1px solid #09090b;
+  border-top: 1px solid #09090b;
+
+  /* 将列设置为相同宽度 */
+  width: 100%;
+
+  &-header,
+  &-item {
+    text-align: center;
+    padding: 12rpx 0;
+    border-bottom: 1px solid #09090b;
+    border-left: 1px solid #09090b;
+  }
+
+  &-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+  }
+}

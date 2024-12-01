@@ -1,0 +1,105 @@
+<view class="wrapper">
+  <view class="tabs">
+    <view class="tab-item {{activeIndex === 0 ? 'active' : ''}}" bind:tap="changeActiveIndex" data-index="0">
+      <view>等额本息</view>
+      <view class="tips">(每月还款金额相同)</view>
+    </view>
+    <view class="tab-item {{activeIndex === 1 ? 'active' : ''}}" bind:tap="changeActiveIndex" data-index="1">
+      <view>等额本金</view>
+      <view class="tips">(首月还款最多，逐月递减)</view>
+    </view>
+  </view>
+  <swiper autoplay="{{false}}" class="swiper" bindchange="onSwiperChange" current="{{activeIndex}}">
+    <swiper-item>
+      <view class="form-item">
+        <view class="title">月供</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAndInterest.monthReturn}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">总利息</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAndInterest.totalInterest}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">本息合计</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAndInterest.totalMoney}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">贷款金额</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAndInterest.loanMoney}}</view>万元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">贷款期限</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAndInterest.years}}</view>年
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="form-item">
+        <view class="title">首月月供</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.firstMonthAmount}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">每月递减</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.subAmountEveryMonth}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">总利息</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.totalInterest}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">本息合计</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.totalMoney}}</view>元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">贷款金额</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.loanMoney}}</view>万元
+        </view>
+      </view>
+      <view class="form-item">
+        <view class="title">贷款期限</view>
+        <view class="info">
+          <view class="value">{{equalPrincipalAmount.years}}</view>年
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+  <view class="table">
+    <view class="table-header" bind:tap="toTop">期数</view>
+    <view class="table-header" bind:tap="toTop">月供(元)</view>
+    <view class="table-header" bind:tap="toTop">本金(元)</view>
+    <view class="table-header" bind:tap="toTop">利息(元)</view>
+    <view class="table-header" bind:tap="toTop">待还本金(元)</view>
+    <block wx:if="{{activeIndex === 0}}">
+      <block wx:for="{{equalPrincipalAndInterest.list}}" wx:key="month">
+        <view class="table-item" wx:for="{{item}}" wx:for-item="subItem" wx:key="*this">
+          {{subItem}}
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <block wx:for="{{equalPrincipalAmount.list}}" wx:key="month">
+        <view class="table-item" wx:for="{{item}}" wx:for-item="subItem" wx:key="*this">
+          {{subItem}}
+        </view>
+      </block>
+    </block>
+  </view>
+</view>
