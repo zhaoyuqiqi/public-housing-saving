@@ -15,7 +15,7 @@
     <input class="input" placeholder="请输入月数" type="number" value="{{month}}" bindinput="onChange" data-type="month" />
   </view>
   <view class="item">
-    <text class="month">个人月缴存额（单位：元）</text>
+    <text class="month">双边月缴存额之和（单位：元）</text>
     <input class="input" placeholder="请输入薪资" type="number" value="{{money}}" bindinput="onChange" data-type="money" />
   </view>
   <view class="item">

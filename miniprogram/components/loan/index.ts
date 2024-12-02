@@ -44,7 +44,7 @@ Component({
       const type = e.target.dataset.type
       const value = e.detail.value
       this.setData({
-        [type as 'ratio' | 'month' | 'money']: value
+        [type as 'ratio' | 'month' | 'money']: Number(value)
       })
     },
     onYearsChange(e: any) {
@@ -55,7 +55,7 @@ Component({
       })
     },
     computedAmount() {
-      const { money, month, year, ratio, cityCode, remainAmount } = this.data
+      const { money, month, year, ratio, cityCode, remainAmount, city } = this.data
       if (!cityCode) {
         return wx.showToast({
           title: '请选择城市',
@@ -87,29 +87,28 @@ Component({
           icon: 'none'
         })
       }
-      console.log(cityCode, month, money, remainAmount, ratio, year);
-      // cityCode,
-      // paidMonths,
-      // monthlyDeposit,
-      // accountBalance,
-      // sumOfBilateralRatio,
-      // loanLife,
-      // selfRatio,
-      // companyRatio,
-
       const params = `cityCode=${cityCode}&paidMonths=${Number(month)}&monthlyDeposit=${Number(money)}&accountBalance=${Number(remainAmount)}&sumOfBilateralRatio=${Number(ratio)}&companyRatio=${Number((Number(ratio) / 2).toFixed(2))}&selfRatio=${Number((Number(ratio) / 2).toFixed(2))}&loanLife=${parseInt(year)}`
       console.log(`https://gongjijin.zhaoyuqi.top:30443/public-housing-saving/loan-info?${params}`);
       wx.request({
         url: `https://gongjijin.zhaoyuqi.top:30443/public-housing-saving/loan-info?${params}`,
         method: 'GET',
         success: (res) => {
-          console.log(res);
+          const { code, data: amount } = res.data as { code: number; data: number; msg: string }
+          const options = {
+            title: '可贷额度',
+            content: '',
+          }
+          if (res.statusCode === 200 && code === 0) {
+            options.content = `在${city.join('')}您最大可贷款${amount}元（${Number((amount/10000).toFixed(2))}万元）`
+          } else {
+            options.content = `暂无${city.join('')}的公积金贷款信息，已向管理员反馈`
+          }
+          wx.showModal(options)
         },
-        fail(e) {
+        fail() {
           wx.showToast({ icon: 'error', title: '网络错误请稍后再试' })
         }
       })
-
     }
   }
 })
