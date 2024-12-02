@@ -98,15 +98,15 @@ Component({
       // companyRatio,
 
       const params = `cityCode=${cityCode}&paidMonths=${Number(month)}&monthlyDeposit=${Number(money)}&accountBalance=${Number(remainAmount)}&sumOfBilateralRatio=${Number(ratio)}&companyRatio=${Number((Number(ratio) / 2).toFixed(2))}&selfRatio=${Number((Number(ratio) / 2).toFixed(2))}&loanLife=${parseInt(year)}`
-      console.log(`https://gongjijin.zhaoyuqi.top/public-housing-saving/loan-info?${params}`);
+      console.log(`https://gongjijin.zhaoyuqi.top:30443/public-housing-saving/loan-info?${params}`);
       wx.request({
-        url: `https://gongjijin.zhaoyuqi.top/public-housing-saving/loan-info?${params}`,
-        method:'GET',
+        url: `https://gongjijin.zhaoyuqi.top:30443/public-housing-saving/loan-info?${params}`,
+        method: 'GET',
         success: (res) => {
           console.log(res);
         },
         fail(e) {
-          console.error(e);
+          wx.showToast({ icon: 'error', title: '网络错误请稍后再试' })
         }
       })
 
